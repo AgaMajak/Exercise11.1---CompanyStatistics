@@ -11,16 +11,38 @@ public class CompanyDataFileReader {
     private static File FILE = new File(FILE_NAME);
 
 
-    public static void readEmployeeFile(Employee[] employees) throws FileNotFoundException {
+    public static Employee[] readEmployeeFile() throws FileNotFoundException {
+        Scanner scanner = new Scanner(FILE);
         int i = 0;
-        Scanner scan = new Scanner(FILE);
-        while (scan.hasNextLine()) {
-            String line = scan.nextLine();
+        int lines = getLines();
+        Employee[] employees = new Employee[lines];
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
             String[] employeeElements = line.split(";");
-            int parse = Integer.parseInt(employeeElements[4]);
-            employees[i] = new Employee(employeeElements[0], employeeElements[1], employeeElements[2], employeeElements[3], parse);
+            String firstName = employeeElements[0];
+            String lastName = employeeElements[1];
+            String pesel = employeeElements [2];
+            String departament = employeeElements[3];
+            String salary = employeeElements[4];
+            int parse = Integer.parseInt(salary);
+            employees[i] = new Employee(firstName, lastName, pesel, departament, parse);
             i++;
         }
-        scan.close();
+        scanner.close();
+        return employees;
     }
+
+    private static int getLines() throws FileNotFoundException {
+
+        Scanner scan = new Scanner(FILE);
+        int lines = 0;
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            lines++;
+        }
+        scan.close();
+        return lines;
+    }
+
+
 }

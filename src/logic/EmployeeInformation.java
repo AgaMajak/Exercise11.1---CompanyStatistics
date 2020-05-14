@@ -5,7 +5,7 @@ import Data.Employee;
 public class EmployeeInformation {
 
     public static int bigestSalary(Employee[] employees) {
-        int maxSalary = employees[0].getSalary();
+        int maxSalary = 0;
         for (Employee employee : employees) {
             if (employee.getSalary() > maxSalary) {
                 maxSalary = employee.getSalary();
